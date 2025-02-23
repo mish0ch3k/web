@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор складу палива</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div class="container">
+        <h2>Калькулятор складу палива</h2>
+        <p>Введіть відсотковий склад компонентів:</p>
+        <label>Вуглець (C), %: <input type="number" id="carbon" value="50.6"></label><br>
+        <label>Водень (H), %: <input type="number" id="hydrogen" value="4.2"></label><br>
+        <label>Кисень (O), %: <input type="number" id="oxygen" value="6.4"></label><br>
+        <label>Азот (N), %: <input type="number" id="nitrogen" value="1.2"></label><br>
+        <label>Сірка (S), %: <input type="number" id="sulfur" value="3.3"></label><br>
+        <label>Волога (W), %: <input type="number" id="moisture" value="7"></label><br>
+        <label>Зола (A), %: <input type="number" id="ash" value="15.8"></label><br>
+		
+
+        
+        <button onclick="calculate()">Розрахувати</button>
+
+        <div class="output" id="output"></div>
+    </div>
+	<script src="script.js"></script>
+</body>
+</html>
