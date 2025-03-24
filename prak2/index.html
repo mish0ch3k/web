@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Веб-калькулятор викидів</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .container { max-width: 600px; margin: auto; padding: 20px; }
+        input { width: 100%; padding: 8px; margin: 5px 0; }
+        button { padding: 10px; margin-top: 10px; cursor: pointer; }
+        .result { font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Розрахунок валових викидів твердих частинок</h2>
+        <label>Донецьке газове вугілля (т):</label>
+        <input type="number" id="coal" value="858613.05">
+        <label>Високосірчистий мазут (т):</label>
+        <input type="number" id="mazut" value="88993.41">
+        <label>Природний газ (м³):</label>
+        <input type="number" id="gas" value="104435.26">
+        <button onclick="calculateEmissions()">Розрахувати</button>
+        <div class="result" id="output"></div>
+    </div>
+
+    <script>
+        function calculateEmissions() {
+            const coal = parseFloat(document.getElementById('coal').value);
+            const mazut = parseFloat(document.getElementById('mazut').value);
+            const gas = parseFloat(document.getElementById('gas').value);
+
+            const k_coal = 150 / 1000000; // 150 г/ГДж -> т/ГДж
+            const k_mazut = 0.57 / 1000000; // 0.57 г/ГДж -> т/ГДж
+            const k_gas = 0; // Для газу викиди відсутні
+
+            const Qr_coal = 20.47; // МДж/кг
+            const Qr_mazut = 40.40; // МДж/кг
+            const Qr_gas = 33.08; // МДж/м³
+
+            const emissions_coal = coal * Qr_coal * k_coal;
+            const emissions_mazut = mazut * Qr_mazut * k_mazut;
+            const emissions_gas = gas * Qr_gas * k_gas;
+
+            const totalEmissions = emissions_coal + emissions_mazut + emissions_gas;
+
+            document.getElementById('output').innerHTML = `
+                Викиди при спалюванні вугілля: ${emissions_coal.toFixed(2)} т<br>
+                Викиди при спалюванні мазуту: ${emissions_mazut.toFixed(2)} т<br>
+                Викиди при спалюванні газу: ${emissions_gas.toFixed(2)} т<br>
+                <strong>Загальні викиди: ${totalEmissions.toFixed(2)} т</strong>
+            `;
+        }
+    </script>
+</body>
+</html>
